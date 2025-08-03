@@ -1,8 +1,18 @@
-@@ .. @@
-   "scripts": {
--    "test": "echo \"Error: no test specified\" && exit 1"
-+    "test": "echo \"Error: no test specified\" && exit 1",
-+    "dev": "vite",
-+    "build": "vite build",
-+    "preview": "vite preview"
-   },
+{
+  "name": "rsmk-homepage",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "script.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": ["homepage", "rsmk", "particles", "animation"],
+  "author": "",
+  "license": "ISC",
+  "description": "RSMK Homepage with gold letters and animated particles",
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}
