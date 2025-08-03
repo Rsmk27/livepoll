@@ -3,7 +3,7 @@ class ParticleSystem {
     constructor() {
         this.container = document.getElementById('particles');
         this.particles = [];
-        this.maxParticles = 50;
+        this.maxParticles = 120; // Increased for more luxury
         this.init();
     }
 
@@ -27,8 +27,8 @@ class ParticleSystem {
         const particle = document.createElement('div');
         particle.className = 'particle';
         
-        // Random size between 1-4px
-        const size = Math.random() * 3 + 1;
+        // Random size between 1-6px for more variety
+        const size = Math.random() * 5 + 1;
         particle.style.width = `${size}px`;
         particle.style.height = `${size}px`;
         
@@ -36,20 +36,20 @@ class ParticleSystem {
         const startX = Math.random() * window.innerWidth;
         particle.style.left = `${startX}px`;
         
-        // Random horizontal drift
-        const randomX = (Math.random() - 0.5) * 100;
+        // Enhanced random horizontal drift
+        const randomX = (Math.random() - 0.5) * 150;
         particle.style.setProperty('--random-x', `${randomX}px`);
         
-        // Random animation duration between 8-15 seconds
-        const duration = Math.random() * 7 + 8;
+        // Random animation duration between 6-18 seconds for more variety
+        const duration = Math.random() * 12 + 6;
         particle.style.animationDuration = `${duration}s`;
         
-        // Random delay to stagger particles
-        const delay = Math.random() * 5;
+        // Random delay to stagger particles more
+        const delay = Math.random() * 8;
         particle.style.animationDelay = `${delay}s`;
         
-        // Random opacity
-        const opacity = Math.random() * 0.6 + 0.2;
+        // Enhanced random opacity for luxury effect
+        const opacity = Math.random() * 0.8 + 0.3;
         particle.style.opacity = opacity;
         
         // Add particle to container
@@ -90,41 +90,64 @@ class ParticleSystem {
 // Enhanced mouse interaction effects
 class MouseEffects {
     constructor() {
+        this.customCursor = document.getElementById('customCursor');
         this.init();
     }
 
     init() {
+        this.initCustomCursor();
         this.createMouseTrail();
         this.addHoverEffects();
+    }
+
+    initCustomCursor() {
+        document.addEventListener('mousemove', (e) => {
+            this.customCursor.style.left = `${e.clientX - 10}px`;
+            this.customCursor.style.top = `${e.clientY - 10}px`;
+        });
+
+        // Add hover effects for interactive elements
+        const interactiveElements = document.querySelectorAll('.nav-link, .company-name');
+        
+        interactiveElements.forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                this.customCursor.classList.add('hover');
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                this.customCursor.classList.remove('hover');
+            });
+        });
     }
 
     createMouseTrail() {
         let mouseX = 0;
         let mouseY = 0;
-        let trail = [];
 
         document.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
 
-            // Create subtle glow effect at mouse position
-            this.createGlowEffect(mouseX, mouseY);
+            // Create enhanced glow effect at mouse position
+            if (Math.random() > 0.7) { // Reduce frequency for performance
+                this.createLuxuryGlowEffect(mouseX, mouseY);
+            }
         });
     }
 
-    createGlowEffect(x, y) {
+    createLuxuryGlowEffect(x, y) {
         const glow = document.createElement('div');
         glow.style.position = 'fixed';
         glow.style.left = `${x}px`;
         glow.style.top = `${y}px`;
-        glow.style.width = '20px';
-        glow.style.height = '20px';
-        glow.style.background = 'radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%)';
+        glow.style.width = '30px';
+        glow.style.height = '30px';
+        glow.style.background = 'radial-gradient(circle, rgba(255, 215, 0, 0.6) 0%, rgba(255, 215, 0, 0.2) 50%, transparent 100%)';
         glow.style.borderRadius = '50%';
         glow.style.pointerEvents = 'none';
         glow.style.zIndex = '5';
         glow.style.transform = 'translate(-50%, -50%)';
-        glow.style.animation = 'fadeOut 1s ease-out forwards';
+        glow.style.animation = 'luxuryFadeOut 1.5s ease-out forwards';
 
         document.body.appendChild(glow);
 
@@ -133,15 +156,15 @@ class MouseEffects {
             if (glow.parentNode) {
                 glow.parentNode.removeChild(glow);
             }
-        }, 1000);
+        }, 1500);
     }
 
     addHoverEffects() {
         const companyName = document.querySelector('.company-name');
         
         companyName.addEventListener('mouseenter', () => {
-            companyName.style.transform = 'scale(1.05)';
-            companyName.style.transition = 'transform 0.3s ease';
+            companyName.style.transform = 'scale(1.08)';
+            companyName.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
         });
 
         companyName.addEventListener('mouseleave', () => {
@@ -177,11 +200,17 @@ class PerformanceManager {
     }
 
     optimizeForLowPerformance() {
-        // Reduce particle count
+        // Reduce particle count and disable custom cursor on low performance devices
         const style = document.createElement('style');
         style.textContent = `
             .particle {
                 animation-duration: 20s !important;
+            }
+            .custom-cursor {
+                display: none !important;
+            }
+            body {
+                cursor: auto !important;
             }
         `;
         document.head.appendChild(style);
@@ -243,26 +272,33 @@ class AccessibilityManager {
     }
 }
 
-// Add fadeOut animation for mouse glow effect
-const fadeOutStyle = document.createElement('style');
-fadeOutStyle.textContent = `
-    @keyframes fadeOut {
+// Add luxury fadeOut animation for mouse glow effect
+const luxuryFadeOutStyle = document.createElement('style');
+luxuryFadeOutStyle.textContent = `
+    @keyframes luxuryFadeOut {
         0% {
             opacity: 1;
             transform: translate(-50%, -50%) scale(0);
         }
+        25% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(0.5);
+        }
         50% {
-            opacity: 0.8;
+            opacity: 0.9;
             transform: translate(-50%, -50%) scale(1);
+        }
+        75% {
+            opacity: 0.5;
+            transform: translate(-50%, -50%) scale(1.3);
         }
         100% {
             opacity: 0;
-            transform: translate(-50%, -50%) scale(1.5);
+            transform: translate(-50%, -50%) scale(2);
         }
     }
 `;
-document.head.appendChild(fadeOutStyle);
-
+document.head.appendChild(luxuryFadeOutStyle);
 // Initialize all systems when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize particle system
