@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a New Poll</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Create a New Poll</h1>
+        <a href="index.html">Back to Polls</a>
+    </header>
+    <main>
+        <form id="create-poll-form">
+            <label for="question">Poll Question:</label>
+            <input type="text" id="question" required>
+
+            <label>Options:</label>
+            <div id="options-container">
+                <input type="text" class="option" required>
+                <input type="text" class="option" required>
+            </div>
+            <button type="button" id="add-option-btn">Add Option</button>
+
+            <button type="submit">Create Poll</button>
+        </form>
+        <div id="share-link-container" style="display: none;">
+            <h2>Share this poll:</h2>
+            <input type="text" id="share-link" readonly>
+            <button id="copy-link-btn">Copy Link</button>
+        </div>
+    </main>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-database-compat.js"></script>
+    <script src="js/firebase.js"></script>
+    <script src="js/create.js"></script>
+</body>
+</html>
